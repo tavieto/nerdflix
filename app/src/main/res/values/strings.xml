@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Nerdflix</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="release">Lançamento</string>
+    <string name="to_you">Para você</string>
+    <string name="see_more">Ver mais</string>
+    <string name="action">Ação</string>
+    <string name="drama">Drama</string>
+    <string name="movie_details">Detalhes do filme</string>
+    <string name="synopsis">Sinopse</string>
+    <string name="cast">Elenco</string>
+</resources>

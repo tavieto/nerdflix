@@ -16,5 +16,10 @@ data class MovieRequest(
     val description: String = "",
 
     @SerializedName("starList")
-    val starList: List<Star> = emptyList()
+    val starList: List<Star> = emptyList(),
+
+    @SerializedName("genreList")
+    val genreList: List<Genre>,
+
+    val genre: Genre
 )

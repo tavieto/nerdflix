@@ -32,12 +32,7 @@ interface ApiService {
     }
 
     @GET("ComingSoon/$API_KEY")
-    suspend fun getComingSoonMovie() : ListMovie
+    suspend fun getComingSoonMovies() : ListMovie
 
-    @GET("Keyword/$API_KEY/dramas")
-    suspend fun getDramaMovies() : ListMovie
-
-    @GET("Keyword/$API_KEY/dramas")
-    suspend fun getActionMovies() : ListMovie
 
 }

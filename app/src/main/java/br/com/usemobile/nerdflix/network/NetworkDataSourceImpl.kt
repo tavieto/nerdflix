@@ -1,13 +1,13 @@
 package br.com.usemobile.nerdflix.network
 
-import br.com.usemobile.nerdflix.network.model.MovieRequest
+import br.com.usemobile.nerdflix.network.model.ListMovie
 
 class NetworkDataSourceImpl : NetworkDataSource {
 
     private val service = ApiService.service
 
-    override suspend fun getComingSoonMovie(): MovieRequest {
-        return service.getComingSoonMovie().list[0]
+    override suspend fun getAllMovies(): ListMovie {
+        return service.getComingSoonMovies()
     }
 
     companion object {

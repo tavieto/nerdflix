@@ -5,20 +5,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.usemobile.nerdflix.databinding.ItemMovieBinding
-import br.com.usemobile.nerdflix.network.model.MovieRequest
+import br.com.usemobile.nerdflix.network.model.Movie
+import com.bumptech.glide.Glide
 
 class MovieAdapter(
-    private val callback: (item: MovieRequest) -> Unit
+    private val callback: (item: Movie) -> Unit
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listData: List<MovieRequest> = emptyList()
+    private var listData: List<Movie> = emptyList()
 
     inner class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MovieRequest) {
-            binding.text.text = item.id
+        fun bind(item: Movie) {
+            setImage(item)
+            binding.text.text = item.title
             binding.root.setOnClickListener {
                 callback(item)
             }
+        }
+
+        private fun setImage(item: Movie) {
+            Glide
+                .with(binding.root)
+                .load(item.pathImage)
+                .centerCrop()
+                .into(binding.image)
         }
     }
 
@@ -36,7 +46,7 @@ class MovieAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<MovieRequest>) {
+    fun setList(list: List<Movie>) {
         listData = list
         notifyDataSetChanged()
     }

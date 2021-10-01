@@ -11,11 +11,7 @@ class RemoteRepositoryImpl(
     private val networkDataSourceImpl: NetworkDataSource
 ): RemoteRepository {
 
-    override fun getComingSoonMovie(): ListMovie {
-        var response = ListMovie(emptyList())
-        CoroutineScope(Dispatchers.IO).launch {
-            response = networkDataSourceImpl.getAllMovies()
-        }
-        return response
+    override suspend fun getComingSoonMovie(): ListMovie {
+        return networkDataSourceImpl.getAllMovies()
     }
 }

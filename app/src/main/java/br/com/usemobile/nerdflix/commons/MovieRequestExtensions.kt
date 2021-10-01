@@ -13,6 +13,6 @@ fun MovieRequest.toModel(): Movie {
         starList.toModel(),
         starList,
         genreList,
-        genre.key
+        ""
     )
 }

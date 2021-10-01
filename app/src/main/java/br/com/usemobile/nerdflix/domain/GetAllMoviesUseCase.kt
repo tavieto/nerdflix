@@ -7,7 +7,7 @@ class GetAllMoviesUseCase(
     private val remoteRepository: RemoteRepository
 ) {
 
-    fun getAllMovies(): List<Movie> {
+    suspend fun getAllMovies(): List<Movie> {
         return remoteRepository.getComingSoonMovie().list.map { it.toModel() }
     }
 

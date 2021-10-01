@@ -1,12 +1,16 @@
 package br.com.usemobile.nerdflix.presentation.splash
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.usemobile.nerdflix.commons.setActionFilter
 import br.com.usemobile.nerdflix.commons.setDramaFilter
 import br.com.usemobile.nerdflix.domain.GetAllMoviesUseCase
 import br.com.usemobile.nerdflix.domain.SetAllDramaMoviesUseCase
 import br.com.usemobile.nerdflix.network.model.Movie
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SplashViewModel(
     private val getAllMoviesUseCase: GetAllMoviesUseCase,
@@ -14,14 +18,32 @@ class SplashViewModel(
     private val setAllActionMovieUseCase: SetAllDramaMoviesUseCase
 ): ViewModel() {
 
-    fun getAllMovies() {
-        Log.i("SplashViewModel", "QUALQUER COISA")
-        val allMovies = getAllMoviesUseCase.getAllMovies()
+    init {
+        getAllMovies()
+    }
 
-        Log.i("SplashViewModel", "${getAllMoviesUseCase.getAllMovies()}")
+    val success: MutableLiveData<Boolean> = MutableLiveData()
 
-        setDramaMovies(allMovies)
-        setActionMovies(allMovies)
+    private fun getAllMovies() {
+        try {
+        CoroutineScope(Dispatchers.IO).launch {
+
+                val allMovies = getAllMoviesUseCase.getAllMovies()
+
+                Log.i("SplashViewModel", "$allMovies")
+
+                setDramaMovies(allMovies)
+                setActionMovies(allMovies)
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    success.value = true
+                }
+            }
+        } catch (e: Throwable) {
+            CoroutineScope(Dispatchers.Main).launch {
+                success.value = false
+            }
+        }
     }
 
     private fun setDramaMovies(movies: List<Movie>) {

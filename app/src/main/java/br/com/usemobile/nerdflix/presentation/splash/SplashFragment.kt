@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import br.com.usemobile.nerdflix.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -23,7 +25,17 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        splashViewModel.getAllMovies()
+        setObservers()
+    }
+
+    private fun setObservers() {
+        splashViewModel.success.observe(viewLifecycleOwner, { isSuccess ->
+            if (isSuccess) {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            } else {
+                Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 }

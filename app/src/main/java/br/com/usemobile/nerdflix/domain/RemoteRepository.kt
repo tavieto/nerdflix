@@ -8,6 +8,6 @@ import br.com.usemobile.nerdflix.network.model.MovieRequest
 
 interface RemoteRepository {
 
-    fun getComingSoonMovie(): ListMovie
+    suspend fun getComingSoonMovie(): ListMovie
 
 }

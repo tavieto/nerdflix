@@ -2,12 +2,12 @@ package br.com.usemobile.nerdflix.domain
 
 import br.com.usemobile.nerdflix.network.model.Movie
 
-class GetAllActionMovieUseCase(
+class GetAllForYouMovieUseCase(
     private val localRepository: LocalRepository
 ) {
 
-    suspend fun getAllActionMovie(): List<Movie> {
-        return localRepository.getAllActionMovies()
+    suspend fun getAllForYouMovie(): List<Movie> {
+        return localRepository.getAllForYouMovies()
     }
 
 }

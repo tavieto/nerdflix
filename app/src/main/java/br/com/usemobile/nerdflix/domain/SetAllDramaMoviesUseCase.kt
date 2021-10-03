@@ -5,7 +5,7 @@ import br.com.usemobile.nerdflix.network.model.Movie
 class SetAllDramaMoviesUseCase(
     private val localRepository: LocalRepository
 ) {
-    fun setAllDramaMovies(movies: List<Movie>) {
+    suspend fun setAllDramaMovies(movies: List<Movie>) {
         localRepository.setAllDramaMovies(movies)
     }
 }

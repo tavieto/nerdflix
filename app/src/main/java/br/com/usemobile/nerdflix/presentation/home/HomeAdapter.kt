@@ -8,9 +8,9 @@ import br.com.usemobile.nerdflix.databinding.ItemMovieBinding
 import br.com.usemobile.nerdflix.network.model.Movie
 import com.bumptech.glide.Glide
 
-class MovieAdapter(
+class HomeAdapter(
     private val callback: (item: Movie) -> Unit
-) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+) : RecyclerView.Adapter<HomeAdapter.MovieViewHolder>() {
 
     private var listData: List<Movie> = emptyList()
 

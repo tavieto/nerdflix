@@ -2,7 +2,7 @@ package br.com.usemobile.nerdflix.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ListMovie(
+data class ListTop250Movies(
     @SerializedName("items")
-    val list: List<MovieRequest>
+    val list: List<MovieId>
 )

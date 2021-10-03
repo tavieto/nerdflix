@@ -8,5 +8,6 @@ data class Movie(
     val starListString: String,
     val starList: List<Star>,
     val genreList: List<Genre>,
-    val genre: String
+    val genre: String,
+    val actorList: List<ActorRequest> = emptyList()
 )

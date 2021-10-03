@@ -1,13 +1,14 @@
 package br.com.usemobile.nerdflix.commons
 
 import br.com.usemobile.nerdflix.data_local.drama.MovieDramaEntity
+import br.com.usemobile.nerdflix.data_local.for_you.MovieForYouEntity
 import br.com.usemobile.nerdflix.network.model.Genre
 import br.com.usemobile.nerdflix.network.model.Movie
 import br.com.usemobile.nerdflix.network.model.Star
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-fun MovieDramaEntity.setStringify(): Movie {
+fun MovieForYouEntity.toMovie(): Movie {
     val currentMovieDB = this
     val gson = Gson()
 

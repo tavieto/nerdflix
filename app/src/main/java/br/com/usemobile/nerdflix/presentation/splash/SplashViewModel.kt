@@ -1,24 +1,30 @@
 package br.com.usemobile.nerdflix.presentation.splash
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.usemobile.nerdflix.commons.getImage
 import br.com.usemobile.nerdflix.commons.setActionFilter
 import br.com.usemobile.nerdflix.commons.setDramaFilter
-import br.com.usemobile.nerdflix.domain.GetAllMoviesUseCase
-import br.com.usemobile.nerdflix.domain.SetAllDramaMoviesUseCase
+import br.com.usemobile.nerdflix.domain.*
 import br.com.usemobile.nerdflix.network.model.Movie
+import br.com.usemobile.nerdflix.network.model.MovieId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
-    private val getAllMoviesUseCase: GetAllMoviesUseCase,
+    private val getComingSoonMoviesUseCase: GetComingSoonMoviesUseCase,
+    private val getTop250MoviesUseCase: GetTop250MoviesUseCase,
+    private val getTitleUseCase: GetTitleUseCase,
     private val setAllDramaMovieUseCase: SetAllDramaMoviesUseCase,
-    private val setAllActionMovieUseCase: SetAllDramaMoviesUseCase
-): ViewModel() {
+    private val setAllActionMovieUseCase: SetAllActionMoviesUseCase,
+    private val setAllForYouMoviesUseCase: SetAllForYouMoviesUseCase,
+    private val deleteAllLocalDataUseCase: DeleteAllLocalDataUseCase
+) : ViewModel() {
 
     init {
+        deleteAllData()
         getAllMovies()
     }
 
@@ -26,12 +32,24 @@ class SplashViewModel(
 
     private fun getAllMovies() {
         try {
-        CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.IO).launch {
 
-                val allMovies = getAllMoviesUseCase.getAllMovies()
+                delay(2000L)
 
-                Log.i("SplashViewModel", "$allMovies")
+                val top250Movies = getTop250Movies().take(20)
 
+                // Iria implementar os filmes do Coming Soon no item de lançamento, mas deixei quieto.
+                // val comingSoonMovies = getComingSoonMovies()
+
+                val allMovies: MutableList<Movie> = mutableListOf()
+
+                top250Movies.forEach { movieId ->
+                    allMovies.add(getTitle(movieId))
+                }
+
+                val allMovieShuffled = allMovies.shuffled()
+
+                setForYouMovies(allMovieShuffled)
                 setDramaMovies(allMovies)
                 setActionMovies(allMovies)
 
@@ -40,18 +58,50 @@ class SplashViewModel(
                 }
             }
         } catch (e: Throwable) {
-            CoroutineScope(Dispatchers.Main).launch {
-                success.value = false
-            }
+            // No network connection
         }
     }
 
+    private suspend fun getComingSoonMovies(): List<Movie> {
+        return getComingSoonMoviesUseCase.getComingSoonMovies()
+    }
+
+    private suspend fun getTop250Movies(): List<MovieId> {
+        return getTop250MoviesUseCase.getTop250Movies()
+    }
+
+    private suspend fun getTitle(movieId: MovieId): Movie {
+        val title = getTitleUseCase.getTitle(movieId)
+        title.starList.forEach {
+            it.getImage(title.actorList)
+        }
+        return title
+    }
+
     private fun setDramaMovies(movies: List<Movie>) {
-        setAllDramaMovieUseCase.setAllDramaMovies(movies.setDramaFilter())
+        val filterDrama = movies.setDramaFilter()
+        CoroutineScope(Dispatchers.IO).launch {
+            setAllDramaMovieUseCase.setAllDramaMovies(filterDrama)
+        }
     }
 
     private fun setActionMovies(movies: List<Movie>) {
-        setAllActionMovieUseCase.setAllDramaMovies(movies.setActionFilter())
+        val filterAction = movies.setActionFilter()
+        CoroutineScope(Dispatchers.IO).launch {
+            setAllActionMovieUseCase.setAllActionMovies(filterAction)
+        }
+    }
+
+    private fun setForYouMovies(movies: List<Movie>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            setAllForYouMoviesUseCase.setAllForYouMovies(movies)
+        }
+    }
+
+    private fun deleteAllData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            deleteAllLocalDataUseCase.deleteAll()
+        }
     }
 
 }

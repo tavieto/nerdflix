@@ -12,5 +12,10 @@ interface LocalDataSource {
 
     suspend fun setAllActionMovies(movies: List<Movie>)
 
+    suspend fun getAllForYouMovies(): List<Movie>
+
+    suspend fun setAllForYouMovies(movies: List<Movie>)
+
+    suspend fun deleteAll()
 
 }

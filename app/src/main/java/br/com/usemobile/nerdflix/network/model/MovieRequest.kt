@@ -21,5 +21,8 @@ data class MovieRequest(
     @SerializedName("genreList")
     val genreList: List<Genre>,
 
-    val genre: Genre
+    val genre: Genre,
+
+    @SerializedName("actorList")
+    val actorList: List<ActorRequest>
 )

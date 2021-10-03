@@ -2,12 +2,7 @@ package br.com.usemobile.nerdflix.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Star(
+data class MovieId (
     @SerializedName("id")
-    val id: String,
-
-    @SerializedName("name")
-    val name: String,
-
-    var image: String = ""
+    val id: String
 )

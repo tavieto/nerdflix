@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -21,12 +21,36 @@
         android:id="@+id/detailsFragment"
         android:name="br.com.usemobile.nerdflix.presentation.details.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="pathImage"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="starsString"
+            app:argType="string" />
+        <argument
+            android:name="synopsis"
+            app:argType="string" />
+        <argument
+            android:name="starsId"
+            app:argType="string[]" />
+        <argument
+            android:name="starsName"
+            app:argType="string[]" />
+        <argument android:name="starsImage"
+            app:argType="string[]" />
+    </fragment>
     <fragment
         android:id="@+id/moreFragment"
         android:name="br.com.usemobile.nerdflix.presentation.more.MoreFragment"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more" >
+        <argument
+            android:name="type"
+            app:argType="string" />
         <action
             android:id="@+id/action_moreFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />

@@ -1,168 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--Toolbar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextToolbar"
+                android:text="@string/app_name" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        tools:context=".presentation.home.HomeFragment">
+        android:layout_height="wrap_content">
 
-        <!--Toolbar-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            tools:ignore="MissingConstraints">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextToolbar"
-                    android:text="@string/app_name" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.appcompat.widget.Toolbar>
-        <!--Release text-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_release"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/margin_default"
-
-            android:fontFamily="@font/lato_light"
-            android:text="@string/release"
-            android:textSize="@dimen/text_title"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-        <!--Release image-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_release"
-            android:layout_width="216dp"
-            android:layout_height="316dp"
             android:background="@color/black"
-            app:cardCornerRadius="6dp"
-            android:layout_marginTop="@dimen/margin_default"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_release">
+            tools:context=".presentation.home.HomeFragment">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_release"
+            <!--Release text-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_release"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/margin_default"
+
+                android:fontFamily="@font/lato_light"
+                android:text="@string/release"
+                android:textSize="@dimen/text_title"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--Release image-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_release"
                 android:layout_width="216dp"
                 android:layout_height="316dp"
-                android:background="@color/white" />
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@color/black"
+                app:cardCornerRadius="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_release">
 
-        </androidx.cardview.widget.CardView>
-        <!--Release title-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_release_title"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_release"
+                    android:layout_width="216dp"
+                    android:layout_height="316dp"
+                    android:background="@color/white" />
 
-            android:fontFamily="@font/lato_bold"
+            </androidx.cardview.widget.CardView>
+            <!--Release title-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_release_title"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
 
-            app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/lato_bold"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_release"
-            tools:text="O predestinado" />
-        <!--Star text-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_stars"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:textColor="@color/grey_thin"
+                app:layout_constraintEnd_toEndOf="parent"
 
-            android:textSize="@dimen/text_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_view_release"
+                tools:text="O predestinado" />
+            <!--Star text-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_stars"
+                style="@style/TextDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/grey_thin"
 
-            app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/text_small"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_release_title"
-            tools:text="Ethan Hawke - Sarah Snook - Noah Taylor" />
-        <!--To you - Category-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/to_you_title"
-            style="@style/CategoryTitle"
+                app:layout_constraintEnd_toEndOf="parent"
 
-            android:text="@string/to_you"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_release_title"
+                tools:text="Ethan Hawke - Sarah Snook - Noah Taylor" />
+            <!--To you - Category-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/to_you_title"
+                style="@style/CategoryTitle"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_stars" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/to_you_more"
-            style="@style/SeeMore"
+                android:text="@string/for_you"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/to_you_title" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/to_you_recycler"
-            style="@style/RecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/to_you_title"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_movie" />
-        <!--Action - Category-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/action_title"
-            style="@style/CategoryTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_stars" />
 
-            android:text="@string/action"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/for_you_more"
+                style="@style/SeeMore"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/to_you_recycler" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/action_more"
-            style="@style/SeeMore"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/to_you_title" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/action_title" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/action_recycler"
-            style="@style/RecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/action_title"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_movie" />
-        <!--Drama - Category-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/drama_title"
-            style="@style/CategoryTitle"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/to_you_recycler"
+                style="@style/RecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/to_you_title"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/item_movie" />
+            <!--Action - Category-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/action_title"
+                style="@style/CategoryTitle"
 
-            android:text="@string/drama"
+                android:text="@string/action"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/action_recycler" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/drama_more"
-            style="@style/SeeMore"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/to_you_recycler" />
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/drama_title" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/drama_recycler"
-            style="@style/RecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/drama_title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="31dp"
-            tools:ignore="MissingConstraints"
-            tools:listitem="@layout/item_movie" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/action_more"
+                style="@style/SeeMore"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/action_title" />
 
-</ScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/action_recycler"
+                style="@style/RecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/action_title"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/item_movie" />
+            <!--Drama - Category-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/drama_title"
+                style="@style/CategoryTitle"
+
+                android:text="@string/drama"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/action_recycler" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/drama_more"
+                style="@style/SeeMore"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/drama_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/drama_recycler"
+                style="@style/RecyclerView"
+                android:layout_marginBottom="31dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/drama_title"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/item_movie" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

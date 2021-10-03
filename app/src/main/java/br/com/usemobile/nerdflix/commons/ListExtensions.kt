@@ -1,10 +1,9 @@
 package br.com.usemobile.nerdflix.commons
 
 import br.com.usemobile.nerdflix.network.model.Movie
-import br.com.usemobile.nerdflix.network.model.MovieRequest
 import br.com.usemobile.nerdflix.network.model.Star
 
-fun List<Star>.toModel(): String {
+fun List<Star>.setStringify(): String {
     var stringStars = this[0].name
     var counter = 1
 
@@ -14,6 +13,39 @@ fun List<Star>.toModel(): String {
     }
 
     return stringStars
+}
+
+fun List<Star>.getStarIds(): List<String> {
+    val currentList = this
+    val listStarId: MutableList<String> = mutableListOf()
+
+    currentList.forEach { star ->
+        listStarId.add(star.id)
+    }
+
+    return listStarId
+}
+
+fun List<Star>.getStarNames(): List<String> {
+    val currentList = this
+    val listStarName: MutableList<String> = mutableListOf()
+
+    currentList.forEach { star ->
+        listStarName.add(star.name)
+    }
+
+    return listStarName
+}
+
+fun List<Star>.getStarImage(): List<String> {
+    val currentList = this
+    val listStarImage: MutableList<String> = mutableListOf()
+
+    currentList.forEach { star ->
+        listStarImage.add(star.image)
+    }
+
+    return listStarImage
 }
 
 fun List<Movie>.setDramaFilter(): List<Movie> {

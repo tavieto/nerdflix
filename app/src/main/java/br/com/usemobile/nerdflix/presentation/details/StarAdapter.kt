@@ -1,23 +1,24 @@
 package br.com.usemobile.nerdflix.presentation.details
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.usemobile.nerdflix.databinding.ItemStarBinding
-import br.com.usemobile.nerdflix.network.model.Star
+import br.com.usemobile.nerdflix.network.model.StarDetails
 import com.bumptech.glide.Glide
 
 class StarAdapter : RecyclerView.Adapter<StarAdapter.StarViewHolder>() {
 
-    private var listData: List<Star> = emptyList()
+    private var listData: List<StarDetails> = emptyList()
 
     inner class StarViewHolder(private val binding: ItemStarBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Star) {
+        fun bind(item: StarDetails) {
             binding.text.text = item.name
 
             Glide
                 .with(binding.root)
-                .load("https://imdb-api.com/images/original/MV5BZWUxY2JmMzgtYzY3ZS00MGI1LWE0ZjAtNTA5MDBiZTZmNzRhXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_Ratio1.5000_AL_.jpg")
+                .load(item.image)
                 .centerCrop()
                 .into(binding.image)
         }
@@ -36,7 +37,8 @@ class StarAdapter : RecyclerView.Adapter<StarAdapter.StarViewHolder>() {
         return listData.size
     }
 
-    fun setList(list: List<Star>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(list: List<StarDetails>) {
         listData = list
         notifyDataSetChanged()
     }

@@ -1,39 +1,36 @@
 package br.com.usemobile.nerdflix.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import br.com.usemobile.nerdflix.commons.toMovieActionEntity
-import br.com.usemobile.nerdflix.commons.toMovieDramaEntity
+import br.com.usemobile.nerdflix.commons.Const
+import br.com.usemobile.nerdflix.commons.getStarIds
+import br.com.usemobile.nerdflix.commons.getStarImage
+import br.com.usemobile.nerdflix.commons.getStarNames
 import br.com.usemobile.nerdflix.databinding.FragmentHomeBinding
 import br.com.usemobile.nerdflix.network.model.Movie
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by viewModel()
-    private val movieAdapterForYou: MovieAdapter by lazy {
-        MovieAdapter {
+    private val movieAdapterForYou: HomeAdapter by lazy {
+        HomeAdapter {
             onClickItem(it)
         }
     }
-    private val movieAdapterAction: MovieAdapter by lazy {
-        MovieAdapter {
+    private val movieAdapterAction: HomeAdapter by lazy {
+        HomeAdapter {
             onClickItem(it)
         }
     }
-    private val movieAdapterDrama: MovieAdapter by lazy {
-        MovieAdapter {
+    private val movieAdapterDrama: HomeAdapter by lazy {
+        HomeAdapter {
             onClickItem(it)
         }
     }
@@ -53,6 +50,28 @@ class HomeFragment : Fragment() {
         getData()
         setObservers()
         setAdapter()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.forYouMore.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections
+                    .actionHomeFragmentToMoreFragment(Const.TYPE_FOR_YOU)
+            )
+        }
+        binding.actionMore.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections
+                    .actionHomeFragmentToMoreFragment(Const.TYPE_ACTION)
+            )
+        }
+        binding.dramaMore.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections
+                    .actionHomeFragmentToMoreFragment(Const.TYPE_DRAMA)
+            )
+        }
     }
 
     private fun getData() {
@@ -76,12 +95,24 @@ class HomeFragment : Fragment() {
 
     }
 
-
     private fun setComingSoon(movie: Movie) {
         binding.txtReleaseTitle.text = movie.title
         binding.txtStars.text = movie.starListString
         setComingSoonImage(movie.pathImage)
 
+        binding.imgRelease.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
+                    movie.pathImage,
+                    movie.title,
+                    movie.starListString,
+                    movie.description,
+                    movie.starList.getStarIds().toTypedArray(),
+                    movie.starList.getStarNames().toTypedArray(),
+                    movie.starList.getStarImage().toTypedArray()
+                )
+            )
+        }
     }
 
     private fun setComingSoonImage(pathImage: String) {
@@ -98,9 +129,17 @@ class HomeFragment : Fragment() {
         binding.dramaRecycler.adapter = movieAdapterDrama
     }
 
-    private fun onClickItem(item: Movie) {
+    private fun onClickItem(movie: Movie) {
         findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToDetailsFragment()
+            HomeFragmentDirections.actionHomeFragmentToDetailsFragment(
+                movie.pathImage,
+                movie.title,
+                movie.starListString,
+                movie.description,
+                movie.starList.getStarIds().toTypedArray(),
+                movie.starList.getStarNames().toTypedArray(),
+                movie.starList.getStarImage().toTypedArray()
+            )
         )
     }
 

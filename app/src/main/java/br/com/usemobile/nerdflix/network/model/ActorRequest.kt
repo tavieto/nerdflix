@@ -2,12 +2,13 @@ package br.com.usemobile.nerdflix.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Star(
+data class ActorRequest(
     @SerializedName("id")
     val id: String,
 
-    @SerializedName("name")
-    val name: String,
+    @SerializedName("image")
+    val pathImage: String,
 
-    var image: String = ""
+    @SerializedName("name")
+    val name: String
 )

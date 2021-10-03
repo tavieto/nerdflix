@@ -6,7 +6,7 @@ class GetAllDramaMovieUseCase(
     private val localRepository: LocalRepository
 ) {
 
-    fun getAllDramaMovie(): List<Movie> {
+    suspend fun getAllDramaMovie(): List<Movie> {
         return localRepository.getAllDramaMovies()
     }
 

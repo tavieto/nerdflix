@@ -4,12 +4,18 @@ import br.com.usemobile.nerdflix.network.model.Movie
 
 interface LocalRepository {
 
-    fun getAllDramaMovies(): List<Movie>
+    suspend fun getAllDramaMovies(): List<Movie>
 
-    fun setAllDramaMovies(movies: List<Movie>)
+    suspend fun setAllDramaMovies(movies: List<Movie>)
 
-    fun getAllActionMovies(): List<Movie>
+    suspend fun getAllActionMovies(): List<Movie>
 
-    fun setAllActionMovies(movies: List<Movie>)
+    suspend fun setAllActionMovies(movies: List<Movie>)
+
+    suspend fun getAllForYouMovies(): List<Movie>
+
+    suspend fun setAllForYouMovies(movies: List<Movie>)
+
+    suspend fun deleteAll()
 
 }

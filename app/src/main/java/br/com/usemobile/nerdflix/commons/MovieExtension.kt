@@ -2,6 +2,7 @@ package br.com.usemobile.nerdflix.commons
 
 import br.com.usemobile.nerdflix.data_local.action.MovieActionEntity
 import br.com.usemobile.nerdflix.data_local.drama.MovieDramaEntity
+import br.com.usemobile.nerdflix.data_local.for_you.MovieForYouEntity
 import br.com.usemobile.nerdflix.network.model.Genre
 import br.com.usemobile.nerdflix.network.model.Movie
 import com.google.gson.Gson
@@ -40,3 +41,19 @@ fun Movie.toMovieActionEntity(): MovieActionEntity {
     )
 }
 
+fun Movie.toMovieForYouEntity(): MovieForYouEntity {
+    val currentMovie = this
+    val gson = Gson()
+
+    return MovieForYouEntity(
+        0,
+        currentMovie.id,
+        currentMovie.title,
+        currentMovie.pathImage,
+        currentMovie.description,
+        currentMovie.starListString,
+        Const.TYPE_ACTION,
+        gson.toJson(currentMovie.starList),
+        gson.toJson(currentMovie.genreList)
+    )
+}

@@ -1,149 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:backgroundTint="#00000000"
+                android:src="@drawable/ic_left_arrow"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextToolbar"
+                android:text="@string/movie_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey_darker"
-        tools:context=".presentation.details.DetailsFragment">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            tools:ignore="MissingConstraints">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_darker"
+            tools:context=".presentation.details.DetailsFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#00000000"
-                    android:layout_marginStart="2dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_left_arrow"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextToolbar"
-                    android:text="@string/movie_details"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <!--Release image-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_release"
-            android:layout_width="216dp"
-            android:layout_height="316dp"
-            android:background="@color/black"
-            app:cardCornerRadius="6dp"
-            android:layout_marginTop="38dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_release"
+            <!--Release image-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_release"
                 android:layout_width="216dp"
                 android:layout_height="316dp"
-                android:background="@color/white" />
+                android:layout_marginTop="38dp"
+                android:background="@color/black"
+                app:cardCornerRadius="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.cardview.widget.CardView>
-        <!--Release title-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_release_title"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_default"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_release"
+                    android:layout_width="216dp"
+                    android:layout_height="316dp"
+                    android:background="@color/white" />
 
-            android:fontFamily="@font/lato_bold"
+            </androidx.cardview.widget.CardView>
+            <!--Release title-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_release_title"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
 
-            app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/lato_bold"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_release"
-            android:text="O predestinado" />
-        <!--Cast text-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_stars"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/grey_thin"
+                android:text="O predestinado"
 
-            android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_view_release" />
+            <!--Cast text-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_stars"
+                style="@style/TextDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Ethan Hawke - Sarah Snook - Noah Taylor"
 
-            app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/grey_thin"
 
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_release_title"
-            android:text="Ethan Hawke - Sarah Snook - Noah Taylor" />
+                android:textSize="@dimen/text_small"
 
-        <View
-            android:id="@+id/horizontal_line_top"
-            app:layout_constraintTop_toBottomOf="@id/txt_stars"
-            style="@style/Line"
-            tools:ignore="MissingConstraints"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_release_title" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_title_synopsis"
-            style="@style/CategoryTitle"
-            android:text="@string/synopsis"
-            android:layout_marginStart="19.5dp"
+            <View
+                android:id="@+id/horizontal_line_top"
+                style="@style/Line"
+                app:layout_constraintTop_toBottomOf="@id/txt_stars"
+                tools:ignore="MissingConstraints" />
 
-            app:layout_constraintTop_toBottomOf="@id/horizontal_line_top"
-            app:layout_constraintStart_toStartOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_title_synopsis"
+                style="@style/CategoryTitle"
+                android:layout_marginStart="19.5dp"
+                android:text="@string/synopsis"
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_synopsis"
-            style="@style/TextDefault"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lato_light"
-            android:textSize="@dimen/text_small"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="23.5dp"
-            android:layout_marginEnd="21dp"
-            android:text="Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena. Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena."
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_title_synopsis"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_top" />
 
-        <View
-            android:id="@+id/horizontal_line_bottom"
-            app:layout_constraintTop_toBottomOf="@id/txt_synopsis"
-            style="@style/Line"
-            tools:ignore="MissingConstraints"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_synopsis"
+                style="@style/TextDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23.5dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="21dp"
+                android:fontFamily="@font/lato_light"
+                android:text="Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena. Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena.Esse é o tipo de filme que é melhor você não ler a sinopse, só assiste, vai valer a pena."
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_title_synopsis" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_cast"
-            style="@style/CategoryTitle"
-            android:text="@string/cast"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/horizontal_line_bottom"
-            app:layout_constraintStart_toStartOf="parent" />
+            <View
+                android:id="@+id/horizontal_line_bottom"
+                style="@style/Line"
+                app:layout_constraintTop_toBottomOf="@id/txt_synopsis"
+                tools:ignore="MissingConstraints" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            style="@style/RecyclerView"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintTop_toBottomOf="@id/txt_cast"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingHorizontal="7.5dp"
-            tools:listitem="@layout/item_star"
-            tools:ignore="MissingConstraints"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_cast"
+                style="@style/CategoryTitle"
+                android:text="@string/cast"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_line_bottom" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                style="@style/RecyclerView"
+                android:layout_marginBottom="24dp"
+                android:paddingHorizontal="7.5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_cast"
+                tools:ignore="MissingConstraints"
+                tools:listitem="@layout/item_star" />
 
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -13,5 +13,8 @@ interface MovieDramaDao {
     @Query("SELECT * FROM movies_drama")
     fun getAll(): List<MovieDramaEntity>
 
+    @Query("DELETE FROM movies_drama")
+    fun deleteAll()
+
 }
 

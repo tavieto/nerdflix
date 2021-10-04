@@ -36,6 +36,11 @@ class SplashFragment : Fragment() {
                 Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show()
             }
         })
+        splashViewModel.existLocalData.observe(viewLifecycleOwner, { existLocalData ->
+            if (existLocalData) {
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            }
+        })
     }
 
 }

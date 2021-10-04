@@ -14,4 +14,5 @@ val useCaseModules = module {
     single { DeleteAllLocalDataUseCase(get()) }
     single { GetTop250MoviesUseCase(get()) }
     single { GetTitleUseCase(get()) }
+    single { VerifyIfExistLocalDataUseCase(get()) }
 }

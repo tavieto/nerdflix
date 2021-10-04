@@ -36,5 +36,13 @@ class LocalRepositoryImpl(
         localDataSource.deleteAll()
     }
 
+    override suspend fun verifyIfExistLocalData(): Boolean {
+        val actionMovies = localDataSource.getAllActionMovies()
+        val dramaMovies = localDataSource.getAllDramaMovies()
+        val forYouMovies = localDataSource.getAllForYouMovies()
+
+        return actionMovies.isNotEmpty() && dramaMovies.isNotEmpty() && forYouMovies.isNotEmpty()
+    }
+
 
 }

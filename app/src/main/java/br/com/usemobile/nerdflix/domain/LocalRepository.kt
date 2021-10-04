@@ -18,4 +18,6 @@ interface LocalRepository {
 
     suspend fun deleteAll()
 
+    suspend fun verifyIfExistLocalData(): Boolean
+
 }

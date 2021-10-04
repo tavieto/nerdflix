@@ -1,5 +1,6 @@
 package br.com.usemobile.nerdflix.presentation.splash
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.usemobile.nerdflix.commons.getImage
@@ -20,18 +21,22 @@ class SplashViewModel(
     private val setAllDramaMovieUseCase: SetAllDramaMoviesUseCase,
     private val setAllActionMovieUseCase: SetAllActionMoviesUseCase,
     private val setAllForYouMoviesUseCase: SetAllForYouMoviesUseCase,
-    private val deleteAllLocalDataUseCase: DeleteAllLocalDataUseCase
+    private val deleteAllLocalDataUseCase: DeleteAllLocalDataUseCase,
+    private val verifyIfExistLocalDataUseCase: VerifyIfExistLocalDataUseCase
 ) : ViewModel() {
 
     init {
-        deleteAllData()
-        getAllMovies()
+//        deleteAllData()
+        verifyIfExistLocalData()
     }
 
     val success: MutableLiveData<Boolean> = MutableLiveData()
 
+    val existLocalData: MutableLiveData<Boolean> = MutableLiveData()
+
     private fun getAllMovies() {
         try {
+            Log.i("SPLASH", "CHEGUEI NO TRY")
             CoroutineScope(Dispatchers.IO).launch {
 
                 delay(2000L)
@@ -101,6 +106,19 @@ class SplashViewModel(
     private fun deleteAllData() {
         CoroutineScope(Dispatchers.IO).launch {
             deleteAllLocalDataUseCase.deleteAll()
+        }
+    }
+
+    private fun verifyIfExistLocalData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = verifyIfExistLocalDataUseCase.verifyIfExistLocalData()
+            CoroutineScope(Dispatchers.Main).launch {
+                existLocalData.value = response
+            }
+
+            if (!response) {
+                getAllMovies()
+            }
         }
     }
 
